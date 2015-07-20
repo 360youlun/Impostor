@@ -1,5 +1,10 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
+from django.conf import settings
+try:
+	from django.contrib.auth import get_user_model
+	User = settings.AUTH_USER_MODEL
+except ImportError:
+	from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from models import ImpostorLog
 from forms import BigAuthenticationForm
